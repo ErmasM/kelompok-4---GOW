@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* 1. RESET & BASIC */
         * {
             margin: 0;
             padding: 0;
@@ -20,33 +19,28 @@
             overflow: hidden;
         }
 
-        /* 2. BACKGROUND FULL SCREEN */
         .container {
             position: relative;
             width: 100%;
             height: 100vh;
-            /* Gambar Background ditaruh di sini agar Full Layar */
             background-image: url('https://wallpapers.com/images/featured/god-of-war-4-4k-l50s10237596005z.jpg');
             background-size: cover;
             background-position: center;
             
-            /* Mengatur posisi anak (Panel Kanan) ke sebelah kanan */
             display: flex;
-            justify-content: flex-end; /* Dorong ke kanan */
+            justify-content: flex-end; 
         }
 
-        /* 3. PANEL KACA (GLASSMORPHISM) */
         .glass-panel {
-            width: 450px; /* Lebar panel */
-            height: 100%; /* Full tinggi dari atas ke bawah */
+            width: 450px; 
+            height: 100%;
             
-            /* KUNCI EFEK KACA: */
-            background: rgba(255, 255, 255, 0.1); /* Putih transparan tipis */
-            backdrop-filter: blur(20px); /* Efek Blur Background di belakangnya */
-            -webkit-backdrop-filter: blur(20px); /* Untuk Safari */
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px); 
             
-            border-left: 1px solid rgba(255, 255, 255, 0.3); /* Garis batas tipis */
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5); /* Bayangan biar panel terlihat melayang */
+            border-left: 1px solid rgba(255, 255, 255, 0.3); 
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5); 
 
             display: flex;
             flex-direction: column;
@@ -61,8 +55,7 @@
             margin-bottom: 60px;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
         }
-
-        /* 4. INPUT FIELDS */
+        
         .form-group {
             width: 100%;
             margin-bottom: 25px;
@@ -75,7 +68,7 @@
             font-size: 16px;
             color: #000;
             
-            /* Background Input Putih Solid (Sesuai referensi) */
+            /* Background Input */
             background: rgba(255, 255, 255, 0.95); 
             border: 1px solid transparent;
             outline: none;
@@ -97,7 +90,7 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
         }
 
-        /* 5. TOMBOL MERAH (Efek Kertas Sobek) */
+        /*  TOMBOL MERAH  */
         .btn-login {
             width: 100%;
             padding: 15px;
@@ -116,7 +109,6 @@
             transition: transform 0.2s;
             text-shadow: 0 2px 4px rgba(0,0,0,0.4);
 
-            /* Efek Sobekan Kasar (Clip Path) */
             clip-path: polygon(
                 0% 2%, 98% 0%, 100% 15%, 98% 30%, 100% 45%, 99% 60%, 100% 75%, 98% 90%, 100% 100%, 
                 2% 98%, 0% 85%, 1% 70%, 0% 55%, 2% 40%, 0% 25%, 2% 10%
@@ -154,8 +146,8 @@
         /* RESPONSIF HP */
         @media (max-width: 768px) {
             .glass-panel {
-                width: 100%; /* Panel memenuhi layar di HP */
-                background: rgba(0, 0, 0, 0.6); /* Lebih gelap biar teks kebaca */
+                width: 100%; 
+                background: rgba(0, 0, 0, 0.6); 
                 backdrop-filter: blur(10px);
             }
         }
