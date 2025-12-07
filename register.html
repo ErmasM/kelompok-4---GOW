@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Menggunakan style yang sama persis dengan Login agar konsisten */
         * {
             margin: 0;
             padding: 0;
@@ -24,14 +23,13 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            /* Background tetap Kratos & Atreus */
+            /* Background Kratos & Atreus */
             background-image: url("c:\Users\HP\Downloads\GOWRG_Wallpaper_Desktop_Boat_4k.jpg"); 
             background-size: cover;
             background-position: center;
             
-            /* --- PERUBAHAN POSISI --- */
             display: flex;
-            justify-content: flex-start; /* Flex-start = Panel ada di KIRI */
+            justify-content: flex-start; 
         }
 
         .glass-panel {
@@ -41,8 +39,6 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             
-            /* --- PERUBAHAN BORDER --- */
-            /* Karena panel di kiri, garis batasnya pindah ke kanan */
             border-right: 1px solid rgba(255, 255, 255, 0.3); 
             border-left: none;
             
@@ -159,7 +155,6 @@
 
     <div class="container">
         
-        <!-- Panel Register (Sekarang ada di Kiri) -->
         <div class="glass-panel">
             
             <img src="c:\Users\HP\Downloads\Screenshot_2025-12-05_193318-removebg-preview.png" alt="God of War" class="logo">
