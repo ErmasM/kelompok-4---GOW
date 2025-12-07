@@ -17,7 +17,6 @@
             height: 100vh;
         }
 
-        /* 1. SETUP VIDEO BACKGROUND */
         #bg-video {
             position: fixed;
             right: 0;
@@ -26,10 +25,9 @@
             min-height: 100%;
             width: auto;
             height: auto;
-            z-index: -100; /* Pastikan di paling belakang */
-            object-fit: cover; /* Agar video memenuhi layar tanpa gepeng */
+            z-index: -100; 
+            object-fit: cover; 
             
-            /* Filter kegelapan agar teks di depan tetap terbaca */
             filter: brightness(0.6); 
         }
 
@@ -44,7 +42,7 @@
         }
         
         .nav-logo img { 
-            height: 50px; /* Sesuaikan ukuran logo di sini */
+            height: 50px; 
             filter: drop-shadow(0 0 5px rgba(0,0,0,0.8));
         }
 
@@ -58,11 +56,10 @@
         }
         .nav-links a.active, .nav-links a:hover { color: white; text-shadow: 0 0 10px white; }
         
-        /* STYLE UNTUK TEKS USER PROFILE (TANPA AVATAR) */
         .user-profile {
-            font-family: 'Cinzel', serif; /* Ganti ke font Cinzel biar lebih gagah */
+            font-family: 'Cinzel', serif; 
             font-size: 14px;
-            color: #cfa35e; /* Warna Emas */
+            color: #cfa35e; 
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: bold;
@@ -90,9 +87,8 @@
             animation: slideInLeft 1s ease-out;
         }
 
-        /* LOGO BESAR DI TENGAH (PENGGANTI TEKS GOD OF WAR) */
         .hero-logo-img {
-            width: 500px; /* Atur lebar logo utama di sini */
+            width: 500px; 
             max-width: 90%;
             margin-bottom: 30px;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
@@ -175,11 +171,6 @@
     <div class="hero-section">
         <p class="welcome-text">The Journey Begins</p>
         
-        <!-- 
-           === 3. LOGO BESAR (UTAMA) === 
-           Ganti src="..." dengan file gambar logomu sendiri.
-           Misal: src="logo-besar.png"
-        -->
         <img src="c:\Users\HP\Downloads\Screenshot_2025-12-05_193318-removebg-preview.png" 
              alt="God of War Title" 
              class="hero-logo-img">
