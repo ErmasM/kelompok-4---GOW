@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God of War Login</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* 1. RESET & BASIC */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            overflow: hidden;
+        }
+
+        /* 2. BACKGROUND FULL SCREEN */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            /* Gambar Background ditaruh di sini agar Full Layar */
+            background-image: url('https://wallpapers.com/images/featured/god-of-war-4-4k-l50s10237596005z.jpg');
+            background-size: cover;
+            background-position: center;
+            
+            /* Mengatur posisi anak (Panel Kanan) ke sebelah kanan */
+            display: flex;
+            justify-content: flex-end; /* Dorong ke kanan */
+        }
+
+        /* 3. PANEL KACA (GLASSMORPHISM) */
+        .glass-panel {
+            width: 450px; /* Lebar panel */
+            height: 100%; /* Full tinggi dari atas ke bawah */
+            
+            /* KUNCI EFEK KACA: */
+            background: rgba(255, 255, 255, 0.1); /* Putih transparan tipis */
+            backdrop-filter: blur(20px); /* Efek Blur Background di belakangnya */
+            -webkit-backdrop-filter: blur(20px); /* Untuk Safari */
+            
+            border-left: 1px solid rgba(255, 255, 255, 0.3); /* Garis batas tipis */
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5); /* Bayangan biar panel terlihat melayang */
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        /* LOGO */
+        .logo {
+            width: 280px;
+            margin-bottom: 60px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
+        }
+
+        /* 4. INPUT FIELDS */
+        .form-group {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            color: #000;
+            
+            /* Background Input Putih Solid (Sesuai referensi) */
+            background: rgba(255, 255, 255, 0.95); 
+            border: 1px solid transparent;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .input-field::placeholder {
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .input-field:focus {
+            transform: scale(1.02);
+            background: #fff;
+            border-left: 5px solid #c00; /* Aksen merah God of War */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        /* 5. TOMBOL MERAH (Efek Kertas Sobek) */
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            margin-top: 30px;
+            background-color: #ff3b3b;
+            background-image: linear-gradient(45deg, #cc0000, #ff5f5f);
+            color: white;
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+
+            /* Efek Sobekan Kasar (Clip Path) */
+            clip-path: polygon(
+                0% 2%, 98% 0%, 100% 15%, 98% 30%, 100% 45%, 99% 60%, 100% 75%, 98% 90%, 100% 100%, 
+                2% 98%, 0% 85%, 1% 70%, 0% 55%, 2% 40%, 0% 25%, 2% 10%
+            );
+        }
+
+        .btn-login:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        /* FOOTER TEXT */
+        .footer-text {
+            margin-top: 40px;
+            color: white;
+            font-family: 'Lato', sans-serif;
+            font-size: 14px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 0.5px;
+        }
+
+        .footer-text a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            transition: 0.3s;
+        }
+
+        .footer-text a:hover {
+            color: #ff3b3b;
+            border-color: #ff3b3b;
+        }
+
+        /* RESPONSIF HP */
+        @media (max-width: 768px) {
+            .glass-panel {
+                width: 100%; /* Panel memenuhi layar di HP */
+                background: rgba(0, 0, 0, 0.6); /* Lebih gelap biar teks kebaca */
+                backdrop-filter: blur(10px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Panel Kanan (Glass Effect) -->
+        <div class="glass-panel">
+            
+            <!-- Logo -->
+            <img src="c:\Users\HP\Downloads\Screenshot_2025-12-05_193318-removebg-preview.png" alt="God of War" class="logo">
+
+            <!-- Form -->
+            <form style="width: 100%;">
+                
+                <div class="form-group">
+                    <!-- EMAIL -->
+                    <input type="email" class="input-field" placeholder="Email" required>
+                </div>
+
+                <div class="form-group">
+                    <!-- PASSWORD -->
+                    <input type="password" class="input-field" placeholder="Password" required>
+                </div>
+
+                <!-- TOMBOL LOGIN -->
+                <button type="submit" class="btn-login">
+                    Login
+                </button>
+
+            </form>
+
+            <p class="footer-text">
+                Don't have an account? <a href="register.html">Register</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
