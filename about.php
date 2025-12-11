@@ -14,7 +14,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
     <title>About Us - God of War Project</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS ASLI DARI FILE ABOUT.HTML */
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Cinzel', serif; background-color: #050505; color: white; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
         .bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://w.wallhaven.cc/full/4x/wallhaven-4x38d3.jpg'); background-size: cover; background-position: center; z-index: -1; filter: brightness(0.4); }

@@ -8,13 +8,15 @@ if (isset($_POST['register'])) {
     $confirm_password = $_POST['confirm_password'];
 
     if ($password === $confirm_password) {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+       
+        
         $cek_email = mysqli_query($conn, "SELECT email FROM users WHERE email = '$email'");
         
         if (mysqli_num_rows($cek_email) > 0) {
             echo "<script>alert('Email sudah terdaftar!');</script>";
         } else {
-            $query = "INSERT INTO users (nama, email, password) VALUES ('$nama', '$email', '$hashed_password')";
+           
+            $query = "INSERT INTO users (nama, email, password) VALUES ('$nama', '$email', '$password')";
             if (mysqli_query($conn, $query)) {
                 echo "<script>alert('Registrasi Berhasil! Silakan Login.'); window.location='login.php';</script>";
             } else {
@@ -26,82 +28,25 @@ if (isset($_POST['register'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>God of War Register</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* CSS ASLI DARI FILE REGISTER.HTML */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Cinzel', serif; overflow: hidden; }
-        .container {
-            position: relative; width: 100%; height: 100vh;
-            /* Saya arahkan ke folder asset agar gambar muncul */
-            background-image: url("asset/GOWRG_Wallpaper_Desktop_Boat_4k.jpg"); 
-            background-size: cover; background-position: center;
-            display: flex; justify-content: flex-start; 
-        }
-        .glass-panel {
-            width: 480px; height: 100%; 
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.3); border-left: none;
-            box-shadow: 10px 0 30px rgba(0,0,0,0.5);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 40px; overflow-y: auto; 
-        }
-        .logo { width: 250px; margin-bottom: 40px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)); }
-        .form-group { width: 100%; margin-bottom: 20px; }
-        .input-field {
-            width: 100%; padding: 15px; font-family: 'Cinzel', serif; font-size: 15px; color: #000;
-            background: rgba(255, 255, 255, 0.95); border: 1px solid transparent; outline: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;
-        }
-        .input-field::placeholder { color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
-        .input-field:focus { transform: scale(1.02); background: #fff; border-left: 5px solid #c00; box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); }
-        .btn-register {
-            width: 100%; padding: 15px; margin-top: 20px;
-            background-color: #ff3b3b; background-image: linear-gradient(45deg, #cc0000, #ff5f5f);
-            color: white; font-family: 'Cinzel', serif; font-size: 20px; font-weight: bold;
-            text-transform: uppercase; letter-spacing: 2px; border: none; cursor: pointer;
-            position: relative; transition: transform 0.2s; text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-            clip-path: polygon(0% 2%, 98% 0%, 100% 15%, 98% 30%, 100% 45%, 99% 60%, 100% 75%, 98% 90%, 100% 100%, 2% 98%, 0% 85%, 1% 70%, 0% 55%, 2% 40%, 0% 25%, 2% 10%);
-        }
-        .btn-register:hover { transform: scale(1.02); filter: brightness(1.1); }
-        .footer-text { margin-top: 30px; color: white; font-family: 'Lato', sans-serif; font-size: 14px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); letter-spacing: 0.5px; }
-        .footer-text a { color: #fff; text-decoration: none; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.5); transition: 0.3s; }
-        .footer-text a:hover { color: #ff3b3b; border-color: #ff3b3b; }
-        @media (max-width: 768px) { .glass-panel { width: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); } }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="glass-panel">
-            <img src="asset/logo.png" alt="God of War" class="logo">
-
-            <form style="width: 100%;" action="" method="POST">
-                <div class="form-group">
-                    <input type="text" name="nama" class="input-field" placeholder="Nama Lengkap" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" class="input-field" placeholder="Email" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="input-field" placeholder="Password" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" name="confirm_password" class="input-field" placeholder="Confirm Password" required>
-                </div>
-                <button type="submit" name="register" class="btn-register">Register</button>
+    <div class="container" style="background:url('asset/GOWRG_Wallpaper_Desktop_Boat_4k.jpg') center/cover; height:100vh; display:flex;">
+        <div class="glass-panel" style="width:450px; padding:40px; background:rgba(255,255,255,0.1); backdrop-filter:blur(15px); height:100%;">
+            <img src="asset/logo.png" style="width:200px; margin-bottom:30px; display:block; margin-left:auto; margin-right:auto;">
+            <form method="POST">
+                <input type="text" name="nama" placeholder="NAMA LENGKAP" class="input-field" required style="width:100%; padding:10px; margin-bottom:15px;">
+                <input type="email" name="email" placeholder="EMAIL" class="input-field" required style="width:100%; padding:10px; margin-bottom:15px;">
+                <input type="password" name="password" placeholder="PASSWORD" class="input-field" required style="width:100%; padding:10px; margin-bottom:15px;">
+                <input type="password" name="confirm_password" placeholder="CONFIRM PASSWORD" class="input-field" required style="width:100%; padding:10px; margin-bottom:15px;">
+                <button type="submit" name="register" class="btn-primary" style="width:100%;">REGISTER</button>
             </form>
-
-            <p class="footer-text">
-                Already have an account? <a href="login.php">Login</a>
-            </p>
+            <p style="text-align:center; margin-top:20px; color:white;">Sudah punya akun? <a href="login.php" style="color:red;">Login</a></p>
         </div>
     </div>
 </body>

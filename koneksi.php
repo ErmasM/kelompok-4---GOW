@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db   = "db_god_of_war"; // Pastikan nama DB nanti sesuai ini
+$db   = "db_god_of_war"; 
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 

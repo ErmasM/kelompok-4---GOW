@@ -14,7 +14,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
     <title>God of War Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS ASLI DARI FILE HOME.HTML */
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Cinzel', serif; color: white; overflow: hidden; height: 100vh; }
         #bg-video {
