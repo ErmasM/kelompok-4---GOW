@@ -1,142 +1,68 @@
 <?php
 session_start();
+include 'koneksi.php';
+
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
     header("Location: login.php");
     exit;
 }
+
+$query = mysqli_query($conn, "SELECT * FROM series");
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pilih Series God of War</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <title>Pilih Series - God of War</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* CSS ASLI DARI FILE SERIES.HTML */
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-        body { font-family: 'Cinzel', serif; background-color: #000; color: white; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
-        .bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://wallpapers.com/images/featured/god-of-war-ragnarok-4k-725838z784743843.jpg'); background-size: cover; background-position: center; z-index: -1; }
-        .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: rgba(0, 0, 0, 0.6); border-bottom: 1px solid rgba(255, 255, 255, 0.1); z-index: 100; backdrop-filter: blur(10px); flex-shrink: 0; }
-        .nav-logo img { height: 35px; }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { text-decoration: none; color: #ccc; font-size: 14px; letter-spacing: 2px; transition: color 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px white; }
-        .logout-btn { color: #ff3b3b; text-decoration: none; font-weight: bold; border: 1px solid #ff3b3b; padding: 8px 20px; transition: all 0.3s; }
-        .logout-btn:hover { background: #ff3b3b; color: white; }
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; position: relative; }
-        .page-title { text-align: center; font-size: 2.5rem; margin-bottom: 20px; text-shadow: 0 4px 10px rgba(0,0,0,0.8); letter-spacing: 5px; text-transform: uppercase; position: absolute; top: 20px; width: 100%; pointer-events: none; }
-        .scroll-container { display: flex; gap: 30px; padding: 0 80px; overflow-x: auto; overflow-y: hidden; height: 100%; align-items: center; cursor: grab; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
-        .scroll-container::-webkit-scrollbar { display: none; }
-        .scroll-container:active { cursor: grabbing; scroll-behavior: auto; }
-        .card { min-width: 240px; width: 240px; height: 420px; background: rgba(20, 20, 30, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); padding: 15px; transition: transform 0.3s ease, border-color 0.3s ease; position: relative; display: flex; flex-direction: column; align-items: center; backdrop-filter: blur(5px); border-radius: 4px; flex-shrink: 0; }
-        .card:hover { transform: scale(1.05) translateY(-10px); border-color: #c00; box-shadow: 0 15px 40px rgba(0,0,0,0.8); z-index: 10; }
-        .card-image-container { width: 100%; height: 260px; overflow: hidden; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05); }
-        .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; pointer-events: none; }
-        .card:hover .card-img { transform: scale(1.1); }
-        .card-title { font-size: 0.9rem; color: #fff; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; text-align: center; margin-bottom: 2px; height: 35px; display: flex; align-items: center; justify-content: center; }
-        .card-info { font-family: 'Lato', sans-serif; font-size: 0.75rem; color: #aaa; margin-bottom: 15px; }
-        .btn-teleport { background-color: #900; color: white; border: none; padding: 8px 0; font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 2px; cursor: pointer; width: 100%; transition: all 0.3s; text-transform: uppercase; clip-path: polygon(0% 0%, 100% 0%, 95% 50%, 100% 100%, 0% 100%, 5% 50%); margin-top: auto; }
-        .btn-teleport:hover { background-color: #f00; box-shadow: 0 0 15px rgba(255, 0, 0, 0.6); }
-        .scroll-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 3px; animation: bounce 2s infinite; pointer-events: none; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);} 40% {transform: translateX(-50%) translateY(-10px);} 60% {transform: translateX(-50%) translateY(-5px);} }
-        @media (max-width: 768px) { .navbar { padding: 10px 20px; flex-direction: column; gap: 10px;} .page-title { font-size: 1.5rem; top: 10px; position: relative;} .scroll-container { padding: 0 20px; } .card { min-width: 200px; width: 200px; height: 350px; } .card-image-container { height: 200px; } }
+        /* CSS Spesifik Halaman Ini */
+        .series-grid {
+            display: flex; gap: 30px; overflow-x: auto; 
+            padding: 50px; width: 100%; scroll-behavior: smooth;
+        }
+        .card {
+            min-width: 250px; background: rgba(20,20,20,0.9);
+            border: 1px solid #444; padding: 15px;
+            transition: 0.3s; flex-shrink: 0;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .card:hover { border-color: var(--primary-red); transform: translateY(-10px); }
+        .card img { width: 100%; height: 300px; object-fit: cover; margin-bottom: 15px; }
+        .card h3 { font-size: 16px; margin-bottom: 5px; text-align: center; }
+        .card p { font-size: 12px; color: #aaa; margin-bottom: 15px; font-family: 'Lato'; }
     </style>
 </head>
 <body>
-    <div class="bg-container"><div class="bg-overlay"></div></div>
+    <div class="background-fixed" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; 
+         background: url('asset/GOWRG_Wallpaper_Desktop_Boat_4k.jpg') no-repeat center/cover; filter: brightness(0.5);">
+    </div>
+
     <nav class="navbar">
-        <a href="home.php" class="nav-logo"><img src="asset/logo.png" alt="God of War"></a>
+        <a href="home.php" class="nav-logo"><img src="asset/logo.png" alt="Logo"></a>
         <div class="nav-links">
             <a href="home.php">HOME</a>
             <a href="series.php" class="active">SERIES</a>
+            <a href="realms.php">REALMS</a>
             <a href="about.php">ABOUT</a>
         </div>
-        <a href="logout.php" class="logout-btn">LOGOUT</a>
+        <a href="logout.php" class="btn-primary" style="padding: 5px 15px; font-size:12px;">LOGOUT</a>
     </nav>
 
     <div class="main-content">
-        <h1 class="page-title">CHOOSE YOUR SAGA</h1>
-        <div class="scroll-container" id="slider">
-            
+        <h1 style="text-shadow: 0 4px 10px black; font-size: 3rem;">CHOOSE YOUR SAGA</h1>
+        
+        <div class="series-grid">
+            <?php while($data = mysqli_fetch_assoc($query)) : ?>
             <div class="card">
-                <div class="card-image-container"><img src="asset/GOW.jpg" class="card-img" alt="GoW 1"></div>
-                <h2 class="card-title">GOD OF WAR</h2>
-                <p class="card-info">2005 - PS 2</p>
-                <button class="btn-teleport" onclick="goToSeries('gow1')">TELEPORT</button>
+                <img src="asset/<?= $data['gambar']; ?>" alt="<?= $data['judul']; ?>">
+                <h3><?= $data['judul']; ?></h3>
+                <p><?= $data['tahun']; ?> - <?= $data['platform']; ?></p>
+                <a href="<?= $data['link_teleport']; ?>" class="btn-primary" style="width:100%; text-align:center; text-decoration:none;">TELEPORT</a>
             </div>
-
-            <div class="card">
-                <div class="card-image-container"><img src="asset/GOW2.jpg" class="card-img" alt="GoW 2"></div>
-                <h2 class="card-title">GOD OF WAR II</h2>
-                <p class="card-info">2007 - PS 2</p>
-                <button class="btn-teleport" onclick="goToSeries('gow_layout.html')">TELEPORT</button>
-            </div>
-
-            <div class="card">
-                <div class="card-image-container"><img src="asset/GOW Chains of olympus.jpg" class="card-img" alt="Chains"></div>
-                <h2 class="card-title">CHAINS OF OLYMPUS</h2>
-                <p class="card-info">2008 - PSP</p>
-                <button class="btn-teleport" onclick="goToSeries('chains_olympus.html')">TELEPORT</button>
-            </div>
-
-            <div class="card">
-                <div class="card-image-container"><img src="asset/GOW3.jpg" class="card-img" alt="GoW 3"></div>
-                <h2 class="card-title">GOD OF WAR III</h2>
-                <p class="card-info">2010 - PS 3</p>
-                <button class="btn-teleport" onclick="goToSeries('gow3_layout.html')">TELEPORT</button>
-            </div>
-
-            <div class="card">
-                <div class="card-image-container"><img src="asset/GOW ghost of sparta.jpg" class="card-img" alt="Ghost"></div>
-                <h2 class="card-title">GHOST OF SPARTA</h2>
-                <p class="card-info">2010 - PSP</p>
-                <button class="btn-teleport" onclick="goToSeries('#ghost')">TELEPORT</button>
-            </div>
-
-            <div class="card">
-                <div class="card-image-container"><img src="asset/GOW ascension.jpg" class="card-img" alt="Ascension"></div>
-                <h2 class="card-title">GOW: ASCENSION</h2>
-                <p class="card-info">2013 - PS 3</p>
-                <button class="btn-teleport" onclick="goToSeries('#ascension')">TELEPORT</button>
-            </div>
-
-            <div class="card">
-                <div class="card-image-container"><img src="asset/GOW 2018.jpg" class="card-img" alt="GoW 2018"></div>
-                <h2 class="card-title">GOD OF WAR (2018)</h2>
-                <p class="card-info">2018 - PS 4</p>
-                <button class="btn-teleport" onclick="goToSeries('#gow2018')">TELEPORT</button>
-            </div>
-
-            <div class="card">
-                <div class="card-image-container"><img src="asset/GOW RAGNAROK.jpg" class="card-img" alt="Ragnarok"></div>
-                <h2 class="card-title">GOW: RAGNARÖK</h2>
-                <p class="card-info">2022 - PS 5</p>
-                <button class="btn-teleport" onclick="goToSeries('#ragnarok')">TELEPORT</button>
-            </div>
-            
+            <?php endwhile; ?>
         </div>
-        <div class="scroll-hint"><<< DRAG OR SCROLL >>></div>
     </div>
-
-    <script>
-        const slider = document.getElementById('slider');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-        slider.addEventListener('mousedown', (e) => { isDown = true; slider.classList.add('active'); startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
-        slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('active'); });
-        slider.addEventListener('mouseup', () => { isDown = false; slider.classList.remove('active'); });
-        slider.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - slider.offsetLeft; const walk = (x - startX) * 2; slider.scrollLeft = scrollLeft - walk; });
-        slider.addEventListener('wheel', (e) => { e.preventDefault(); slider.scrollLeft += e.deltaY; });
-        function goToSeries(url) {
-            if(url.startsWith('#')) { alert("Portal belum terbuka untuk realm ini."); return; }
-            const buttons = document.querySelectorAll('.btn-teleport');
-            buttons.forEach(btn => { btn.innerHTML = "WARPING..."; btn.style.backgroundColor = "#333"; btn.style.cursor = "wait"; });
-            setTimeout(function() { window.location.href = url; }, 500);
-        }
-    </script>
 </body>
 </html>

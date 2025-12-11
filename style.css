@@ -1,0 +1,67 @@
+
+.hero-landing {
+    height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 0 100px;
+    background-size: cover; background-position: center; background-attachment: fixed;
+    position: relative;
+}
+.hero-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.8), transparent);
+}
+.hero-content { position: relative; z-index: 2; max-width: 600px; animation: slideInLeft 1s ease; }
+.hero-title { font-size: 4rem; text-transform: uppercase; color: #fff; text-shadow: 0 0 20px rgba(255,0,0,0.8); margin-bottom: 10px; }
+.hero-subtitle { font-family: 'Lato'; font-size: 1.2rem; color: var(--gold); letter-spacing: 3px; margin-bottom: 30px; }
+
+
+.section-landing { padding: 80px 50px; border-bottom: 1px solid #333; position: relative; }
+.section-title { text-align: center; font-size: 2.5rem; color: var(--gold); margin-bottom: 50px; text-transform: uppercase; letter-spacing: 5px; }
+
+
+.story-container { display: flex; align-items: center; gap: 50px; max-width: 1200px; margin: 0 auto; }
+.story-text { flex: 1; font-family: 'Lato'; line-height: 1.8; color: #ccc; font-size: 1.1rem; text-align: justify; }
+.story-img { flex: 1; width: 100%; border: 2px solid var(--gold); box-shadow: 0 0 30px rgba(0,0,0,0.5); }
+
+
+.timeline-box {
+    border-left: 2px solid var(--primary-red); margin-left: 50px; padding-left: 30px;
+    position: relative; max-width: 800px; margin: 0 auto;
+}
+.timeline-item { margin-bottom: 40px; position: relative; }
+.timeline-item::before {
+    content: ''; position: absolute; left: -39px; top: 0; width: 16px; height: 16px;
+    background: var(--gold); border-radius: 50%; border: 2px solid #000;
+}
+.timeline-date { color: var(--primary-red); font-weight: bold; margin-bottom: 5px; display: block; }
+
+
+.char-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.char-card {
+    width: 200px; background: #111; border: 1px solid #444; text-align: center;
+    transition: 0.3s; overflow: hidden;
+}
+.char-card:hover { transform: translateY(-10px); border-color: var(--gold); }
+.char-img { width: 100%; height: 250px; object-fit: cover; filter: grayscale(80%); transition: 0.3s; }
+.char-card:hover .char-img { filter: grayscale(0%); }
+.char-name { padding: 10px; font-size: 1.2rem; color: #fff; }
+.char-role { padding-bottom: 15px; font-size: 0.8rem; color: var(--primary-red); font-family: 'Lato'; }
+
+
+.weapon-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.weapon-card {
+    width: 300px; background: rgba(255,255,255,0.05); border: 1px solid #444; padding: 20px;
+    text-align: center; transition: 0.3s;
+}
+.weapon-card:hover { background: rgba(255,255,255,0.1); border-color: var(--primary-red); }
+.weapon-img { height: 150px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+
+
+.map-preview { width: 80%; margin: 0 auto; display: block; border: 3px solid var(--gold); filter: sepia(50%); transition: 0.5s; }
+.map-preview:hover { filter: sepia(0%); transform: scale(1.02); }
+
+@media (max-width: 768px) {
+    .story-container { flex-direction: column; }
+    .hero-title { font-size: 2.5rem; }
+    .hero-landing { padding: 0 20px; }
+}
