@@ -5,83 +5,59 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - God of War Project</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <title>About Us</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Cinzel', serif; background-color: #050505; color: white; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
-        .bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://w.wallhaven.cc/full/4x/wallhaven-4x38d3.jpg'); background-size: cover; background-position: center; z-index: -1; filter: brightness(0.4); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: rgba(0, 0, 0, 0.6); border-bottom: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
-        .nav-logo img { height: 40px; }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { text-decoration: none; color: #ccc; font-size: 14px; letter-spacing: 2px; transition: color 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px white; }
-        .logout-btn { color: #ff3b3b; text-decoration: none; font-weight: bold; border: 1px solid #ff3b3b; padding: 8px 20px; transition: all 0.3s; }
-        .logout-btn:hover { background: #ff3b3b; color: white; }
-        .main-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 50px 20px; text-align: center; }
-        .page-header { margin-bottom: 60px; animation: fadeInDown 1s ease-out; }
-        .page-title { font-size: 3rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 10px; text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
-        .page-subtitle { font-family: 'Lato', sans-serif; font-size: 1rem; color: #cfa35e; letter-spacing: 3px; text-transform: uppercase; border-top: 1px solid #cfa35e; border-bottom: 1px solid #cfa35e; padding: 10px 20px; display: inline-block; }
-        .team-container { display: flex; gap: 50px; flex-wrap: wrap; justify-content: center; }
-        .member-card { width: 300px; height: 450px; background: rgba(20, 20, 20, 0.8); border: 1px solid #444; position: relative; transition: all 0.4s ease; overflow: hidden; clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%); }
-        .member-card:nth-child(1) { animation: slideInLeft 1s ease-out; }
-        .member-card:nth-child(2) { animation: slideInRight 1s ease-out; }
-        .member-card:hover { transform: translateY(-10px); border-color: #cfa35e; box-shadow: 0 0 30px rgba(207, 163, 94, 0.2); }
-        .member-img { width: 100%; height: 70%; object-fit: cover; filter: grayscale(80%); transition: all 0.5s; }
+        .bg-container { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-image: url('asset/GOW3.jpg'); /* Pakai aset lokal */
+            background-size: cover; background-position: center; z-index: -1; filter: brightness(0.4); 
+        }
+        .main-content { padding: 50px 20px; text-align: center; }
+        .team-container { display: flex; gap: 50px; flex-wrap: wrap; justify-content: center; margin-top: 50px; }
+        .member-card { width: 300px; height: 450px; background: rgba(20, 20, 20, 0.8); border: 1px solid #444; position: relative; transition: 0.4s; overflow: hidden; }
+        .member-card:hover { transform: translateY(-10px); border-color: #cfa35e; }
+        .member-img { width: 100%; height: 70%; object-fit: cover; filter: grayscale(80%); transition: 0.5s; }
         .member-card:hover .member-img { filter: grayscale(0%); transform: scale(1.1); }
-        .member-info { position: absolute; bottom: 0; width: 100%; height: 35%; background: linear-gradient(to top, #000 90%, transparent); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; z-index: 10; }
-        .member-name { font-size: 1.1rem; color: #fff; text-transform: uppercase; font-weight: bold; margin-bottom: 5px; line-height: 1.4; }
-        .member-nim { font-family: 'Lato', sans-serif; font-size: 0.9rem; color: #cfa35e; letter-spacing: 2px; margin-bottom: 10px; }
-        .course-info { margin-top: 80px; font-family: 'Lato', sans-serif; font-size: 0.9rem; color: #666; letter-spacing: 1px; animation: fadeInUp 1.5s ease-out; }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-        @media (max-width: 768px) { .navbar { flex-direction: column; gap: 15px; padding: 15px; } .team-container { flex-direction: column; align-items: center; } .page-title { font-size: 2rem; } }
+        .member-info { position: absolute; bottom: 0; width: 100%; height: 35%; background: linear-gradient(to top, #000 90%, transparent); display: flex; flex-direction: column; justify-content: center; color: white; }
     </style>
 </head>
 <body>
     <div class="bg-container"></div>
     <nav class="navbar">
-        <a href="home.php" class="nav-logo"><img src="asset/logo.png" alt="God of War"></a>
+        <a href="home.php" class="nav-logo"><img src="asset/logo.png"></a>
         <div class="nav-links">
             <a href="home.php">HOME</a>
             <a href="series.php">SERIES</a>
             <a href="about.php" class="active">ABOUT</a>
         </div>
-        <a href="logout.php" class="logout-btn">LOGOUT</a>
+        <a href="logout.php" class="btn-primary" style="font-size: 12px;">LOGOUT</a>
     </nav>
 
     <div class="main-content">
-        <div class="page-header">
-            <h1 class="page-title">THE CREATORS</h1>
-            <div class="page-subtitle">PRAKTIKUM PEMROGRAMAN WEB SHIFT A</div>
-        </div>
+        <h1 class="hero-title" style="font-size: 3rem;">THE CREATORS</h1>
+        <div style="border-top: 1px solid #cfa35e; border-bottom: 1px solid #cfa35e; padding: 10px 20px; display: inline-block; color: #cfa35e;">PRAKTIKUM PEMROGRAMAN WEB SHIFT A</div>
+        
         <div class="team-container">
             <div class="member-card">
-                <img src="https://i.pinimg.com/736x/8a/ef/a9/8aefa9e8633703352723c34a26f394c3.jpg" alt="Ermas" class="member-img">
+                <img src="asset/GOW.jpg" alt="Ermas" class="member-img">
                 <div class="member-info">
-                    <h2 class="member-name">ERMAS MUHAMMAD <br> SYATAFA</h2>
-                    <p class="member-nim">H1D024030</p>
+                    <h2 style="margin-bottom: 5px;">ERMAS MUHAMMAD <br> SYATAFA</h2>
+                    <p style="color: #cfa35e;">H1D024030</p>
                 </div>
             </div>
             <div class="member-card">
-                <img src="https://i.pinimg.com/564x/5d/3a/0e/5d3a0e7e7233827038743003009f4477.jpg" alt="Ezra" class="member-img">
+                <img src="asset/GOW2.jpg" alt="Ezra" class="member-img">
                 <div class="member-info">
-                    <h2 class="member-name">EZRA ZACKYSA <br> YENDI PUTRA</h2>
-                    <p class="member-nim">H1D024111</p>
+                    <h2 style="margin-bottom: 5px;">EZRA ZACKYSA <br> YENDI PUTRA</h2>
+                    <p style="color: #cfa35e;">H1D024111</p>
                 </div>
             </div>
-        </div>
-        <div class="course-info">
-            &copy; 2025 God of War Project. All rights reserved. <br> Designed for Web Programming Practicum.
         </div>
     </div>
 </body>
