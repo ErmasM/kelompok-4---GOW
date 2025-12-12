@@ -1,168 +1,257 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap');
 
 :root {
-    --gold: #cfa35e;
-    --black: #050505;
+    --gold: #d4af37;     /* Warna Emas Mewah */
+    --gold-dark: #b8860b;
+    --black: #000000;
     --white: #ffffff;
-    --red: #b30000;
+    --red: #8b0000;      /* Merah Gelap untuk tombol */
+    --bg-gray: #f4f4f4;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body { 
-    font-family: 'Lato', sans-serif; 
-    display: flex; 
-    min-height: 100vh; 
+body {
+    font-family: 'Lato', sans-serif;
     background-color: var(--white);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* SIDEBAR - Black & Gold */
+/* --- SIDEBAR --- */
 .sidebar {
-    width: 250px;
+    width: 260px;
     background-color: var(--black);
     color: var(--white);
+    position: fixed; /* Sidebar Tetap */
+    top: 0; bottom: 0; left: 0;
     display: flex;
     flex-direction: column;
-    padding: 30px 0;
-    border-right: 5px solid var(--gold);
-    flex-shrink: 0;
-}
-
-.logo-area {
-    text-align: center;
-    margin-bottom: 50px;
-    padding: 0 20px;
-}
-.logo-area img { width: 150px; margin-bottom: 10px; }
-.logo-area h2 { font-family: 'Cinzel'; font-size: 1.2rem; letter-spacing: 2px; color: var(--white); }
-
-.menu-item {
-    padding: 15px 30px;
-    color: var(--gold);
-    text-decoration: none;
-    font-family: 'Cinzel';
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    background: linear-gradient(90deg, transparent 0%, transparent 100%);
-    transition: 0.3s;
-    border-left: 0px solid var(--gold);
-    margin-bottom: 10px;
-    background-color: #1a1a1a;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    border-radius: 4px;
-}
-
-.menu-item:hover, .menu-item.active {
-    background-color: var(--gold);
-    color: var(--black);
-    font-weight: bold;
-}
-
-/* CONTENT - White Background */
-.content {
-    flex: 1;
-    padding: 40px 50px;
+    padding: 30px 20px;
+    border-right: 4px solid var(--gold);
+    z-index: 100;
     overflow-y: auto;
 }
 
-.page-title {
-    font-family: 'Cinzel';
-    font-size: 2rem;
-    color: var(--red);
-    border-bottom: 2px solid var(--gold);
-    padding-bottom: 15px;
-    margin-bottom: 30px;
+.brand {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.brand h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #ccc;
+    letter-spacing: 2px;
+}
+
+.brand img {
+    width: 180px; 
+    margin-bottom: 10px;
+    filter: invert(1) brightness(2); /* Logo putih */
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-link {
+    display: block;
+    padding: 12px 15px;
+    background-color: var(--gold); /* Tombol Emas */
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: 1px solid var(--gold-dark);
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.menu-link:hover, .menu-link.active {
+    background-color: var(--gold-dark);
+    transform: translateY(-2px);
+}
+
+.menu-link.logout {
+    margin-top: 50px;
+    background-color: #333;
+    border-color: #444;
+}
+
+/* --- CONTENT AREA --- */
+.content {
+    margin-left: 260px; /* Memberi ruang untuk sidebar */
+    padding: 40px 60px;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+}
+
+/* HEADER HALAMAN */
+.page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid transparent; /* Spacer */
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: var(--red);
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 .btn-add {
-    background: var(--red);
+    background-color: var(--red);
     color: white;
-    text-decoration: none;
     padding: 10px 25px;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
     font-size: 1rem;
-    font-family: 'Cinzel';
-    border: none;
-    cursor: pointer;
+    border: 1px solid darkred;
+    transition: 0.3s;
 }
 
-/* TABLE STYLING */
+.btn-add:hover { background-color: #a00000; }
+
+/* --- TABLE STYLING --- */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 50px;
     border: 2px solid var(--gold);
+    margin-bottom: 50px;
 }
 
-thead { background-color: var(--black); }
-th { 
-    color: var(--white); 
-    padding: 15px; 
-    font-family: 'Cinzel'; 
-    text-transform: uppercase; 
+thead {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+th {
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    padding: 15px;
     text-align: left;
     border-bottom: 3px solid var(--gold);
 }
 
-td { 
-    padding: 15px; 
-    border-bottom: 1px solid #ddd; 
+td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
     vertical-align: middle;
 }
 
-tr:nth-child(even) { background-color: #f9f9f9; }
+tr:nth-child(even) { background-color: #fff8e1; } /* Baris selang-seling */
 
-/* ACTION BUTTONS */
 .btn-action {
     padding: 5px 15px;
-    border: 1px solid #ccc;
-    text-decoration: none;
     font-family: 'Cinzel';
+    text-decoration: none;
     font-size: 0.8rem;
+    border: 1px solid #ccc;
     margin-right: 5px;
-    display: inline-block;
     cursor: pointer;
+    display: inline-block;
 }
+
 .btn-edit { background: var(--red); color: white; border-color: var(--red); }
 .btn-delete { background: white; color: black; border-color: var(--gold); }
 
-/* FORM STYLING */
+/* --- FORM STYLING (Box Emas) --- */
 .form-box {
-    border: 2px solid var(--gold);
+    border: 3px solid var(--gold);
     padding: 30px;
-    background: white;
-    max-width: 800px;
+    background-color: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-width: 100%;
 }
 
 .form-group { margin-bottom: 20px; }
-.form-label { 
-    display: block; 
-    font-family: 'Cinzel'; 
-    margin-bottom: 8px; 
-    font-weight: bold; 
-    color: black;
+
+.form-label {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
 }
-.form-input {
+
+.form-input, .form-select, .form-textarea {
     width: 100%;
     padding: 12px;
-    border: 2px solid black;
-    font-family: 'Lato';
+    border: 2px solid var(--black);
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    outline: none;
 }
-.form-file { border: 2px solid black; padding: 10px; width: 100%; }
 
-/* DASHBOARD CARDS */
-.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-.stat-card {
-    border: 2px solid var(--gold);
-    padding: 40px;
-    text-align: center;
-    background: white;
-    color: black;
+.form-input:focus { border-color: var(--gold); }
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
 }
-.stat-num { font-size: 4rem; font-family: 'Cinzel'; display: block; margin-bottom: 10px; font-weight: bold; }
-.stat-label { font-family: 'Cinzel'; color: var(--red); font-size: 1.2rem; text-transform: uppercase; }
+
+.btn-save {
+    background-color: var(--gold);
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    font-family: 'Cinzel';
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.btn-cancel {
+    background-color: white;
+    color: black;
+    padding: 10px 30px;
+    border: 2px solid black;
+    text-decoration: none;
+    font-family: 'Cinzel';
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+/* --- DASHBOARD CARDS --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.card-stat {
+    border: 3px solid var(--gold);
+    background: white;
+    padding: 50px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.stat-num {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-family: 'Cinzel', serif;
+    color: var(--red);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}

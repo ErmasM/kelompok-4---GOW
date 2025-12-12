@@ -7,7 +7,7 @@ if (!isset($_SESSION['status']) || $_SESSION['role'] != 'admin') {
     exit;
 }
 
-// Hitung Data
+// Hitung Data untuk Statistik
 $chars = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM characters"))['t'];
 $story = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM timeline"))['t'];
 $realms = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM realms"))['t'];
@@ -18,39 +18,46 @@ $weapons = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM wea
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - God of War</title>
+    <title>Dashboard - Admin Panel</title>
     <link rel="stylesheet" href="admin_style.css">
 </head>
 <body>
 
     <div class="sidebar">
-        <h2>GOD <span>OF</span> WAR<br><small style="font-size:0.8rem; color:#888;">ADMIN PANEL</small></h2>
-        <a href="admin_dashboard.php" class="menu-link active">DASHBOARD</a>
-        <a href="manage_characters.php" class="menu-link">MANAGE CHARACTERS</a>
-        <a href="manage_story.php" class="menu-link">MANAGE STORY</a>
-        <a href="manage_realms.php" class="menu-link">MANAGE REALMS</a>
-        <a href="manage_weapons.php" class="menu-link">MANAGE WEAPONS</a>
-        <a href="../logout.php" class="menu-link" style="background:#333; margin-top:auto;">LOGOUT</a>
+        <div class="brand">
+            <img src="../asset/logo.png" alt="Logo">
+            <h2>ADMIN PANEL</h2>
+        </div>
+        <div class="menu">
+            <a href="admin_dashboard.php" class="menu-link active">DASHBOARD</a>
+            <a href="manage_characters.php" class="menu-link">MANAGE CHARACTERS</a>
+            <a href="manage_story.php" class="menu-link">MANAGE STORY</a>
+            <a href="manage_realms.php" class="menu-link">MANAGE REALMS</a>
+            <a href="manage_weapons.php" class="menu-link">MANAGE WEAPONS</a>
+            <a href="../logout.php" class="menu-link logout">LOGOUT</a>
+        </div>
     </div>
 
     <div class="content">
-        <h1 style="text-align:center; font-size: 3rem; color: var(--red); margin-bottom: 50px; text-shadow: 2px 2px 0px #ccc;">DASHBOARD</h1>
+        <div class="page-header" style="justify-content: center;">
+            <h1 class="page-title" style="font-size: 3rem; margin-bottom: 40px; text-shadow: 2px 2px 4px #ccc;">DASHBOARD</h1>
+        </div>
         
-        <div class="stats-grid">
-            <div class="stat-card">
-                <span class="stat-number"><?= $chars; ?></span>
+        <div class="dashboard-grid">
+            <div class="card-stat">
+                <span class="stat-num"><?= $chars; ?></span>
                 <span class="stat-label">TOTAL CHARACTERS</span>
             </div>
-            <div class="stat-card">
-                <span class="stat-number"><?= $story; ?></span>
+            <div class="card-stat">
+                <span class="stat-num"><?= $story; ?></span>
                 <span class="stat-label">TOTAL STORY</span>
             </div>
-            <div class="stat-card">
-                <span class="stat-number"><?= $realms; ?></span>
+            <div class="card-stat">
+                <span class="stat-num"><?= $realms; ?></span>
                 <span class="stat-label">TOTAL REALMS</span>
             </div>
-            <div class="stat-card">
-                <span class="stat-number"><?= $weapons; ?></span>
+            <div class="card-stat">
+                <span class="stat-num"><?= $weapons; ?></span>
                 <span class="stat-label">TOTAL WEAPONS</span>
             </div>
         </div>
