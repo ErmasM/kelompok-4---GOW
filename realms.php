@@ -27,18 +27,18 @@ $query = mysqli_query($conn, "SELECT * FROM realms");
             <a href="realms.php" class="active">REALMS</a>
             <a href="about.php">ABOUT</a>
         </div>
-        <a href="logout.php" class="btn-primary" style="padding: 8px 20px; font-size:12px; text-decoration:none;">LOGOUT</a>
+        <a href="logout.php" class="btn-primary" style="padding: 8px 20px; font-size:12px;">LOGOUT</a>
     </nav>
 
-    <div class="map-wrapper">
-        <h1 style="position: absolute; top: 20px; color: var(--gold); z-index: 5;">CHOOSE A REALM</h1>
+    <div style="position: relative; text-align: center; padding: 50px; background: #000;">
+        <h1 style="color: var(--gold); margin-bottom: 20px;">CHOOSE A REALM</h1>
         
         <div style="position: relative; display: inline-block;">
-            <img src="asset/MacBook Pro 14_ - 4.jpg" alt="Map" class="map-image">
+            <img src="asset/GOWRG_Wallpaper_Desktop_Vista_4k.jpg" alt="Map" style="max-width: 90%; border: 2px solid var(--gold); opacity: 0.8;">
 
             <?php while($row = mysqli_fetch_assoc($query)) : ?>
                 <div class="realm-point" 
-                     style="top: <?= $row['posisi_top']; ?>; left: <?= $row['posisi_left']; ?>;"
+                     style="position: absolute; width: 20px; height: 20px; background: red; border-radius: 50%; border: 2px solid white; cursor: pointer; top: <?= $row['posisi_top']; ?>; left: <?= $row['posisi_left']; ?>;"
                      onclick="openModal('<?= $row['nama_realm']; ?>', '<?= addslashes($row['deskripsi']); ?>', 'asset/<?= $row['gambar']; ?>')">
                 </div>
             <?php endwhile; ?>
