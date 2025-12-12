@@ -193,3 +193,5 @@ CREATE TABLE IF NOT EXISTS timeline (
     urutan INT,
     FOREIGN KEY (series_id) REFERENCES series(id) ON DELETE CASCADE
 );
+
+ALTER TABLE timeline ADD COLUMN gambar VARCHAR(255);

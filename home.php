@@ -32,7 +32,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
         <div class="nav-links">
             <a href="#" class="active">HOME</a>
             <a href="series.php">SERIES</a>
-            <a href="realms.php">REALMS</a>
             <a href="about.php">ABOUT</a>
         </div>
         <div style="font-family: 'Cinzel'; color: #cfa35e; font-weight: bold;">WELCOME, <?php echo $_SESSION['nama']; ?>!</div>

@@ -40,7 +40,6 @@ $query = mysqli_query($conn, "SELECT * FROM series");
         <div class="nav-links">
             <a href="home.php">HOME</a>
             <a href="series.php" class="active">SERIES</a>
-            <a href="realms.php">REALMS</a>
             <a href="about.php">ABOUT</a>
         </div>
         <a href="logout.php" class="btn-primary" style="padding: 5px 15px; font-size:12px;">LOGOUT</a>
