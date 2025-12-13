@@ -13,10 +13,12 @@ CREATE TABLE users (
 );
 
 -- Insert Admin Default
+-- Password: admin123
 INSERT INTO users (nama, email, password, role) VALUES 
-('Kratos Admin', 'admin@gow.com', 'admin123', 'admin');
+('Kratos Admin', 'admin@gow.com', 'admin123', 'admin'),
+('Boy', 'user@gow.com', 'user123', 'user');
 
--- 3. TABLE SERIES
+-- 3. TABLE SERIES (Updated for Minigame)
 CREATE TABLE series (
     id INT AUTO_INCREMENT PRIMARY KEY,
     judul VARCHAR(100),
@@ -25,16 +27,20 @@ CREATE TABLE series (
     deskripsi TEXT,
     gambar VARCHAR(255),
     header_img VARCHAR(255),
-    link_teleport VARCHAR(100)
+    link_teleport VARCHAR(100),
+    -- Kolom Tambahan untuk Minigame Boss Battle
+    boss_name VARCHAR(100) DEFAULT 'Unknown God',
+    boss_hp INT DEFAULT 1000,
+    boss_img VARCHAR(255) DEFAULT 'logo.png'
 );
 
--- Insert Data Series (Gambar header disesuaikan dengan aset yang ada)
-INSERT INTO series (judul, tahun, platform, deskripsi, gambar, header_img, link_teleport) VALUES 
-('God of War', '2005', 'PS 2', 'Awal mula perjalanan Kratos membalas dendam pada Ares.', 'GOW.jpg', 'GOW.jpg', 'detail.php?id=1'),
-('God of War II', '2007', 'PS 2', 'Kratos dikhianati Zeus dan mulai memburu para Dewa Olympus.', 'GOW2.jpg', 'GOW2.jpg', 'detail.php?id=2'),
-('God of War III', '2010', 'PS 3', 'Akhir dari era Yunani, Kratos menghancurkan Olympus.', 'GOW3.jpg', 'GOW3.jpg', 'detail.php?id=3'),
-('God of War (2018)', '2018', 'PS 4', 'Hidup baru di tanah Nordik bersama putranya, Atreus.', 'GOW 2018.jpg', 'GOWRG_Wallpaper_Desktop_Boat_4k.jpg', 'detail.php?id=4'),
-('God of War Ragnarök', '2022', 'PS 5', 'Fimbulwinter telah tiba. Perang akhir zaman dimulai.', 'GOW RAGNAROK.jpg', 'GOW RAGNAROK.jpg', 'detail.php?id=5');
+-- Insert Data Series (Data Boss disesuaikan dengan aset yang ada)
+INSERT INTO series (judul, tahun, platform, deskripsi, gambar, header_img, link_teleport, boss_name, boss_hp, boss_img) VALUES 
+('God of War', '2005', 'PS 2', 'Awal mula perjalanan Kratos membalas dendam pada Ares, Sang Dewa Perang.', 'GOW.jpg', 'GOW.jpg', 'detail.php?id=1', 'ARES', 800, 'AresGod.webp'),
+('God of War II', '2007', 'PS 2', 'Kratos dikhianati Zeus dan mulai memburu para Dewa Olympus dengan bantuan Titans.', 'GOW2.jpg', 'GOW2.jpg', 'detail.php?id=2', 'ZEUS', 1200, 'Youngzeus.webp'),
+('God of War III', '2010', 'PS 3', 'Akhir dari era Yunani. Kratos mendaki Gunung Olympus untuk membunuh Zeus.', 'GOW3.jpg', 'GOW3.jpg', 'detail.php?id=3', 'HADES', 1000, 'GOW3.jpg'),
+('God of War (2018)', '2018', 'PS 4', 'Hidup baru di tanah Nordik bersama putranya, Atreus. Perjalanan menyebar abu istri.', 'GOW 2018.jpg', 'GOWRG_Wallpaper_Desktop_Boat_4k.jpg', 'detail.php?id=4', 'BALDUR', 1500, 'GOW 2018.jpg'),
+('God of War Ragnarök', '2022', 'PS 5', 'Fimbulwinter telah tiba. Perang akhir zaman dimulai melawan Odin dan Thor.', 'GOW RAGNAROK.jpg', 'GOW RAGNAROK.jpg', 'detail.php?id=5', 'THOR', 2000, 'GOW RAGNAROK.jpg');
 
 -- 4. TABLE REALMS
 CREATE TABLE realms (
@@ -46,11 +52,12 @@ CREATE TABLE realms (
     posisi_left VARCHAR(10)  
 );
 
--- Insert Data Realms (Menggunakan aset wallpaper untuk background modal)
+-- Insert Data Realms (Menggunakan aset background/map yang relevan)
 INSERT INTO realms (nama_realm, deskripsi, gambar, posisi_top, posisi_left) VALUES 
-('Midgard', 'Realm manusia, tempat Kratos tinggal. Hutan lebat dan danau beku.', 'GOW 2018.jpg', '50%', '50%'),
-('Alfheim', 'Rumah para Elves. Realm yang penuh cahaya magis.', 'GOWRG_Wallpaper_Desktop_Vista_4k.jpg', '20%', '75%'),
-('Muspelheim', 'Alam api abadi, tempat ujian kekuatan.', 'GOW ascension.jpg', '70%', '80%');
+('Mount Olympus', 'Rumah para Dewa Yunani. Tempat Kratos membalas dendam.', 'Temple_5.webp', '20%', '60%'),
+('Island of Creation', 'Tempat para Sisters of Fate bersemayam.', 'Island_of_creation.webp', '65%', '25%'),
+('Midgard', 'Realm manusia di mitologi Nordik, tempat Kratos pensiun.', 'GOWRG_Wallpaper_Desktop_Vista_4k.jpg', '50%', '50%'),
+('Sparta', 'Tanah kelahiran Kratos dan pasukan Spartan.', 'GOW ghost of sparta.jpg', '80%', '70%');
 
 -- 5. TABLE CHARACTERS
 CREATE TABLE characters (
@@ -62,28 +69,37 @@ CREATE TABLE characters (
     FOREIGN KEY (series_id) REFERENCES series(id) ON DELETE CASCADE
 );
 
--- Insert Characters (Menggunakan aset yang ada sebagai placeholder agar tidak kosong)
+-- Insert Characters (Menggunakan aset karakter yang ada)
 INSERT INTO characters (series_id, nama, peran, gambar) VALUES 
-(4, 'Kratos', 'God of War', 'GOW 2018.jpg'),
-(4, 'Atreus', 'Son of Kratos', 'GOW RAGNAROK.jpg'),
-(4, 'Freya', 'Witch of the Woods', 'GOWRG_Wallpaper_Desktop_Vista_4k.jpg'),
-(4, 'Baldur', 'The Stranger', 'GOW ascension.jpg');
+(1, 'Athena', 'Goddess of Wisdom', 'Athena_29.webp'),
+(1, 'Artemis', 'Goddess of Hunt', 'Artemis.webp'),
+(4, 'Kratos', 'The Ghost of Sparta', 'GOW 2018.jpg'),
+(4, 'Atreus', 'The Son (Loki)', 'GOW RAGNAROK.jpg'),
+(2, 'Kratos (God)', 'God of War', 'Pcsx2-r4600_2011-07-17_19-56-02-28.webp');
 
--- 6. TABLE WEAPONS
+-- 6. TABLE WEAPONS (Updated for Stats)
 CREATE TABLE weapons (
     id INT AUTO_INCREMENT PRIMARY KEY,
     series_id INT,
     nama_senjata VARCHAR(100),
     deskripsi TEXT,
     gambar VARCHAR(255),
+    -- Kolom Tambahan untuk Statistik Senjata
+    stat_damage INT DEFAULT 50,
+    stat_speed INT DEFAULT 50,
+    stat_range INT DEFAULT 50,
+    stat_cc INT DEFAULT 50,
     FOREIGN KEY (series_id) REFERENCES series(id) ON DELETE CASCADE
 );
 
--- Insert Weapons
-INSERT INTO weapons (series_id, nama_senjata, deskripsi, gambar) VALUES 
-(4, 'Leviathan Axe', 'Kapak es buatan Brok & Sindri.', 'logo.png'),
-(4, 'Blades of Chaos', 'Pedang ikonik masa lalu Kratos.', 'GOW.jpg'),
-(4, 'Guardian Shield', 'Perisai lipat untuk pertahanan.', 'logo.png');
+-- Insert Weapons (Disinkronkan dengan file aset yang ada di folder kamu)
+INSERT INTO weapons (series_id, nama_senjata, deskripsi, gambar, stat_damage, stat_speed, stat_range, stat_cc) VALUES 
+(1, 'Blades of Chaos', 'Senjata ikonik terikat rantai di lengan Kratos.', 'BladeOfChaos_29.webp', 80, 70, 90, 60),
+(1, 'Blade of Artemis', 'Pedang besar pemberian Dewi Artemis.', 'Blade_of_Artemis_29.webp', 95, 40, 50, 80),
+(2, 'Blade of Olympus', 'Pedang legendaris yang mengakhiri perang besar.', 'Blade_of_Olympus.jpg', 100, 50, 70, 90),
+(2, 'Spear of Destiny', 'Tombak ungu dengan serangan jarak jauh.', 'GOW2_Spear_Of_Destiny.jpg', 60, 80, 95, 40),
+(2, 'Barbarian Hammer', 'Palu raksasa milik Raja Barbarian.', 'Barbarian_Hammer.jpg', 98, 20, 40, 100),
+(4, 'Leviathan Axe', 'Kapak es buatan Brok & Sindri untuk Faye.', 'GOW 2018.jpg', 85, 60, 50, 75);
 
 -- 7. TABLE TIMELINE (STORY)
 CREATE TABLE timeline (
@@ -96,19 +112,9 @@ CREATE TABLE timeline (
     FOREIGN KEY (series_id) REFERENCES series(id) ON DELETE CASCADE
 );
 
--- Insert Timeline Sample (Agar fitur timeline zigzag tidak kosong)
+-- Insert Timeline Sample
 INSERT INTO timeline (series_id, judul_chapter, deskripsi, urutan, gambar) VALUES 
-(4, 'The Journey Begins', 'Kratos menebang pohon bertanda tangan istrinya, memulai perjalanan.', 1, 'GOW 2018.jpg'),
-(4, 'The Stranger', 'Pertarungan pertama melawan Baldur yang mengguncang tanah.', 2, 'GOW ascension.jpg'),
-(4, 'Lake of Nine', 'Menemukan kuil Tyr dan Jormungandr.', 3, 'GOWRG_Wallpaper_Desktop_Vista_4k.jpg');
-
-ALTER TABLE weapons 
-ADD COLUMN stat_damage INT DEFAULT 50,
-ADD COLUMN stat_speed INT DEFAULT 50,
-ADD COLUMN stat_range INT DEFAULT 50,
-ADD COLUMN stat_cc INT DEFAULT 50;
-
-ALTER TABLE series 
-ADD COLUMN boss_name VARCHAR(100) DEFAULT 'Unknown God',
-ADD COLUMN boss_hp INT DEFAULT 1000,
-ADD COLUMN boss_img VARCHAR(255) DEFAULT 'logo.png';
+(1, 'Hydra Battle', 'Kratos melawan Hydra di Laut Aegean atas perintah Poseidon.', 1, 'Hydra_Boss_Fight4_-_God_of_War2005.webp'),
+(1, 'Pandora Temple', 'Mencari Kotak Pandora untuk mengalahkan Ares.', 2, 'Temple_5.webp'),
+(4, 'The Journey Begins', 'Kratos menebang pohon bertanda tangan istrinya.', 1, 'GOW 2018.jpg'),
+(4, 'The Stranger', 'Pertarungan pertama melawan Baldur.', 2, 'GOW ascension.jpg');
