@@ -93,7 +93,7 @@ switch ($id) {
         }
         .battle-container {
             width: 900px; height: 600px; position: relative;
-            background: url('asset/GOWRG_Wallpaper_Desktop_Vista_4k.jpg') no-repeat center/cover;
+            background: url('asset/arena.jpg') no-repeat center/cover;
             border: 4px solid <?= $theme_color; ?>;
             box-shadow: 0 0 50px <?= $theme_glow; ?>;
             display: flex; flex-direction: column; overflow: hidden;
@@ -154,7 +154,6 @@ switch ($id) {
     <section class="section-landing">
         <div class="section-header">
             <h2 class="section-title">THE BEGINNING</h2>
-            <span class="section-subtitle">SINOPSIS CERITA</span>
         </div>
         <div class="story-container">
             <div style="flex:1;">
@@ -170,7 +169,7 @@ switch ($id) {
     <section class="section-landing" style="background: #0a0a0a;">
         <div class="section-header">
             <h2 class="section-title">JOURNEY TIMELINE</h2>
-            <span class="section-subtitle">JEJAK LANGKAH KRATOS</span>
+            <span class="section-subtitle">The Path of Athens</span>
         </div>
         <div class="timeline-container">
             <?php 
@@ -216,10 +215,9 @@ switch ($id) {
     <section class="section-landing" style="background: #0a0a0a;">
         <div class="section-header">
             <h2 class="section-title">REALMS MAP</h2>
-            <span class="section-subtitle">JELAJAHI DUNIA</span>
         </div>
         <div class="map-container">
-            <img src="asset/GOWRG_Wallpaper_Desktop_Vista_4k.jpg" class="map-bg">
+            <img src="asset/map.png" class="map-bg">
             <?php while($r = mysqli_fetch_assoc($realms)): ?>
                 <div class="map-point" 
                      style="top: <?= $r['posisi_top']; ?>; left: <?= $r['posisi_left']; ?>;"
@@ -252,7 +250,7 @@ switch ($id) {
         
         <div style="border: 2px solid <?= $theme_color; ?>; padding: 40px; display: inline-block; background: rgba(0,0,0,0.5);">
             <h1 style="color: <?= $theme_color; ?>;">ARE YOU READY?</h1>
-            <p style="color: #ccc; margin-bottom: 20px;">Kalahkan Boss dari seri ini!</p>
+            <p style="color: #ccc; margin-bottom: 20px;">Kalahkan Boss di seri ini!</p>
             <button onclick="openBattle()" class="btn-primary" style="font-size: 1.5rem; padding: 15px 40px; background: <?= $theme_color; ?>;">FIGHT BOSS</button>
         </div>
     </section>

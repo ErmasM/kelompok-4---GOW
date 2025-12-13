@@ -33,7 +33,7 @@ $query = mysqli_query($conn, "SELECT * FROM series");
     </style>
 </head>
 <body>
-    <div style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background: url('asset/GOWRG_Wallpaper_Desktop_Boat_4k.jpg') no-repeat center/cover; filter: brightness(0.5);"></div>
+    <div style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background: url('asset/GOWRG_Wallpapaper_KeyArt_Background_Desktop_4k.jpg') no-repeat center/cover; filter: brightness(0.5);"></div>
 
     <nav class="navbar">
         <a href="home.php" class="nav-logo"><img src="asset/logo.png" alt="Logo"></a>
@@ -46,7 +46,7 @@ $query = mysqli_query($conn, "SELECT * FROM series");
     </nav>
 
     <div style="padding: 50px;">
-        <h1 style="text-shadow: 0 4px 10px black; font-size: 3rem; text-align: center; margin-bottom: 20px;">CHOOSE YOUR SAGA</h1>
+        <h1 style="text-shadow: 0 4px 10px black; font-size: 3rem; text-align: center; margin-bottom: 20px;">CHOOSE YOUR SERIES</h1>
         
         <div class="series-grid">
             <?php while($data = mysqli_fetch_assoc($query)) : ?>
