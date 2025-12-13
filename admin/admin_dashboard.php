@@ -30,6 +30,8 @@ $weapons = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM wea
         </div>
         <div class="menu">
             <a href="admin_dashboard.php" class="menu-link active">DASHBOARD</a>
+            <a href="manage_series.php" class="menu-link">MANAGE SERIES</a>
+            
             <a href="manage_characters.php" class="menu-link">MANAGE CHARACTERS</a>
             <a href="manage_story.php" class="menu-link">MANAGE STORY</a>
             <a href="manage_realms.php" class="menu-link">MANAGE REALMS</a>

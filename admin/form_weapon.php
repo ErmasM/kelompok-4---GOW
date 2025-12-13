@@ -3,23 +3,39 @@ session_start();
 include '../koneksi.php';
 if (!isset($_SESSION['status']) || $_SESSION['role'] != 'admin') { header("Location: ../login.php"); exit; }
 
-$edit_mode = false; $id_edit = ""; $nama_edit = ""; $deskripsi_edit = ""; $series_id_edit = ""; $img_edit = "";
+$edit_mode = false; 
+$id_edit = ""; $nama_edit = ""; $deskripsi_edit = ""; $series_id_edit = ""; $img_edit = "";
+// Default stats
+$dmg_edit = 50; $spd_edit = 50; $rng_edit = 50; $cc_edit = 50;
 
 if (isset($_GET['edit'])) {
     $edit_mode = true;
-    $d = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM weapons WHERE id='$_GET[edit]'"));
-    $id_edit = $d['id']; $nama_edit = $d['nama_senjata']; $deskripsi_edit = $d['deskripsi']; $series_id_edit = $d['series_id']; $img_edit = $d['gambar'];
+    $id = $_GET['edit'];
+    $d = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM weapons WHERE id='$id'"));
+    $id_edit = $d['id']; $nama_edit = $d['nama_senjata']; $deskripsi_edit = $d['deskripsi']; 
+    $series_id_edit = $d['series_id']; $img_edit = $d['gambar'];
+    // Ambil stats dari DB
+    $dmg_edit = $d['stat_damage']; $spd_edit = $d['stat_speed']; 
+    $rng_edit = $d['stat_range']; $cc_edit = $d['stat_cc'];
 }
 
 if (isset($_POST['simpan'])) {
     $nama = htmlspecialchars($_POST['nama_senjata']);
     $deskripsi = htmlspecialchars($_POST['deskripsi']);
     $series_id = $_POST['series_id'];
+    
+    // Ambil data stats
+    $dmg = $_POST['stat_damage']; $spd = $_POST['stat_speed']; 
+    $rng = $_POST['stat_range']; $cc = $_POST['stat_cc'];
 
     if (!empty($_POST['id_edit'])) {
         $id = $_POST['id_edit'];
-        $query = "UPDATE weapons SET nama_senjata='$nama', deskripsi='$deskripsi', series_id='$series_id' WHERE id='$id'";
+        $query = "UPDATE weapons SET 
+                  nama_senjata='$nama', deskripsi='$deskripsi', series_id='$series_id',
+                  stat_damage='$dmg', stat_speed='$spd', stat_range='$rng', stat_cc='$cc' 
+                  WHERE id='$id'";
         mysqli_query($conn, $query);
+        
         if (!empty($_FILES['gambar']['name'])) {
             $gambar = $_FILES['gambar']['name'];
             move_uploaded_file($_FILES['gambar']['tmp_name'], "../asset/" . $gambar);
@@ -28,7 +44,9 @@ if (isset($_POST['simpan'])) {
     } else {
         $gambar = $_FILES['gambar']['name'];
         move_uploaded_file($_FILES['gambar']['tmp_name'], "../asset/" . $gambar);
-        mysqli_query($conn, "INSERT INTO weapons (series_id, nama_senjata, deskripsi, gambar) VALUES ('$series_id', '$nama', '$deskripsi', '$gambar')");
+        $query = "INSERT INTO weapons (series_id, nama_senjata, deskripsi, gambar, stat_damage, stat_speed, stat_range, stat_cc) 
+                  VALUES ('$series_id', '$nama', '$deskripsi', '$gambar', '$dmg', '$spd', '$rng', '$cc')";
+        mysqli_query($conn, $query);
     }
     header("Location: manage_weapons.php");
     exit;
@@ -57,10 +75,10 @@ if (isset($_POST['simpan'])) {
         <div class="form-box">
             <form method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_edit" value="<?= $id_edit; ?>">
+                
                 <div class="form-group"><label class="form-label">NAME</label><input type="text" name="nama_senjata" class="form-input" value="<?= $nama_edit; ?>" required></div>
-                <div class="form-group"><label class="form-label">DESCRIPTION</label><textarea name="deskripsi" class="form-textarea" rows="4" required><?= $deskripsi_edit; ?></textarea></div>
-                <div class="form-group">
-                    <label class="form-label">GAME SERIES</label>
+                <div class="form-group"><label class="form-label">DESCRIPTION</label><textarea name="deskripsi" class="form-textarea" rows="3" required><?= $deskripsi_edit; ?></textarea></div>
+                <div class="form-group"><label class="form-label">GAME SERIES</label>
                     <select name="series_id" class="form-select" required>
                         <option value="">-- Choose Series --</option>
                         <?php $s_q = mysqli_query($conn, "SELECT * FROM series"); while($s = mysqli_fetch_assoc($s_q)) { ?>
@@ -68,6 +86,30 @@ if (isset($_POST['simpan'])) {
                         <?php } ?>
                     </select>
                 </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px; background:#f9f9f9; padding:15px; border:1px solid #ddd; margin-bottom:20px;">
+                    <div class="form-group">
+                        <label class="form-label">DAMAGE (0-100)</label>
+                        <input type="range" name="stat_damage" min="0" max="100" value="<?= $dmg_edit; ?>" oninput="this.nextElementSibling.value = this.value" style="width:80%;">
+                        <output><?= $dmg_edit; ?></output>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">SPEED (0-100)</label>
+                        <input type="range" name="stat_speed" min="0" max="100" value="<?= $spd_edit; ?>" oninput="this.nextElementSibling.value = this.value" style="width:80%;">
+                        <output><?= $spd_edit; ?></output>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">RANGE (0-100)</label>
+                        <input type="range" name="stat_range" min="0" max="100" value="<?= $rng_edit; ?>" oninput="this.nextElementSibling.value = this.value" style="width:80%;">
+                        <output><?= $rng_edit; ?></output>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">CROWD CONTROL (0-100)</label>
+                        <input type="range" name="stat_cc" min="0" max="100" value="<?= $cc_edit; ?>" oninput="this.nextElementSibling.value = this.value" style="width:80%;">
+                        <output><?= $cc_edit; ?></output>
+                    </div>
+                </div>
+
                 <div class="form-group"><label class="form-label">IMAGE</label><?php if($img_edit) echo "<img src='../asset/$img_edit' width='80'><br>"; ?><input type="file" name="gambar" class="form-input" <?= $edit_mode ? '' : 'required'; ?>></div>
                 <div class="form-actions"><a href="manage_weapons.php" class="btn-cancel">CANCEL</a><button type="submit" name="simpan" class="btn-save">SAVE DATA</button></div>
             </form>
