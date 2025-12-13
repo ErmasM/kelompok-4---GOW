@@ -101,3 +101,14 @@ INSERT INTO timeline (series_id, judul_chapter, deskripsi, urutan, gambar) VALUE
 (4, 'The Journey Begins', 'Kratos menebang pohon bertanda tangan istrinya, memulai perjalanan.', 1, 'GOW 2018.jpg'),
 (4, 'The Stranger', 'Pertarungan pertama melawan Baldur yang mengguncang tanah.', 2, 'GOW ascension.jpg'),
 (4, 'Lake of Nine', 'Menemukan kuil Tyr dan Jormungandr.', 3, 'GOWRG_Wallpaper_Desktop_Vista_4k.jpg');
+
+ALTER TABLE weapons 
+ADD COLUMN stat_damage INT DEFAULT 50,
+ADD COLUMN stat_speed INT DEFAULT 50,
+ADD COLUMN stat_range INT DEFAULT 50,
+ADD COLUMN stat_cc INT DEFAULT 50;
+
+ALTER TABLE series 
+ADD COLUMN boss_name VARCHAR(100) DEFAULT 'Unknown God',
+ADD COLUMN boss_hp INT DEFAULT 1000,
+ADD COLUMN boss_img VARCHAR(255) DEFAULT 'logo.png';

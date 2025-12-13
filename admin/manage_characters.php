@@ -7,7 +7,6 @@ if (!isset($_SESSION['status']) || $_SESSION['role'] != 'admin') {
     exit;
 }
 
-// LOGIKA DELETE TETAP DISINI
 if (isset($_GET['hapus'])) {
     $id = $_GET['hapus'];
     mysqli_query($conn, "DELETE FROM characters WHERE id='$id'");
@@ -27,6 +26,8 @@ if (isset($_GET['hapus'])) {
         <div class="brand"><img src="../asset/logo.png"><h2>ADMIN PANEL</h2></div>
         <div class="menu">
             <a href="admin_dashboard.php" class="menu-link">DASHBOARD</a>
+            <a href="manage_series.php" class="menu-link">MANAGE SERIES</a>
+
             <a href="manage_characters.php" class="menu-link active">MANAGE CHARACTERS</a>
             <a href="manage_story.php" class="menu-link">MANAGE STORY</a>
             <a href="manage_realms.php" class="menu-link">MANAGE REALMS</a>
