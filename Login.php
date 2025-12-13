@@ -39,7 +39,7 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container" style="background: url('asset/GOW 2018.jpg') no-repeat center center/cover; height: 100vh; display: flex; justify-content: flex-end; align-items: center;">
+    <div class="container" style="background: url('asset/GOWRG_Wallpaper_Desktop_Vista_4k.jpg') no-repeat center center/cover; height: 100vh; display: flex; justify-content: flex-end; align-items: center;">
         <div class="glass-panel" style="width: 450px; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); border-left: 1px solid rgba(255, 255, 255, 0.3); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px;">
             <img src="asset/logo.png" alt="Logo" class="logo" style="width: 250px; margin-bottom: 50px;">
 
