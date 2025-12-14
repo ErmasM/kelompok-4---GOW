@@ -1,9 +1,12 @@
 <?php
 session_start();
+include 'koneksi.php'; // Jika ada include koneksi
+
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
-    header("Location: login.php");
+    header("Location: index.php"); 
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>

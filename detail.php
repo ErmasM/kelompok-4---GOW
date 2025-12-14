@@ -2,8 +2,16 @@
 session_start();
 include 'koneksi.php';
 
+// PERUBAHAN: Jika belum login, arahkan ke index.php
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
-    header("Location: login.php");
+    header("Location: index.php"); // Diubah dari login.php
+    exit;
+}
+
+if(isset($_GET['id'])) {
+    $id = $_GET['id'];
+} else {
+    header("Location: series.php");
     exit;
 }
 

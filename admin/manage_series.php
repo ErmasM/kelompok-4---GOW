@@ -2,11 +2,11 @@
 session_start();
 include '../koneksi.php';
 
-// Cek Admin
 if (!isset($_SESSION['status']) || $_SESSION['role'] != 'admin') {
-    header("Location: ../login.php");
+    header("Location: ../index.php"); // Redirect ke index.php (mundur 1 folder)
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>

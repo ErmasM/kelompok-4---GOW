@@ -1,11 +1,12 @@
 <?php
 session_start();
-include 'koneksi.php'; // Koneksi Database Ezra
+include 'koneksi.php'; // Jika ada include koneksi
 
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
-    header("Location: login.php");
+    header("Location: index.php"); // Redirect ke index.php
     exit;
 }
+
 
 // Ambil data series dari database Ezra untuk ditampilkan di card Ermas
 $query = mysqli_query($conn, "SELECT * FROM series ORDER BY id ASC");

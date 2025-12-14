@@ -1,11 +1,12 @@
 <?php
 session_start();
+include 'koneksi.php'; // Jika ada include koneksi
 
-// 1. Logic Backend (Sama dengan punya Ezra)
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
-    header("Location: login.php");
+    header("Location: index.php"); // Redirect ke index.php
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>

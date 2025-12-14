@@ -1,7 +1,11 @@
 <?php
 session_start();
 include '../koneksi.php';
-if (!isset($_SESSION['status']) || $_SESSION['role'] != 'admin') { header("Location: ../login.php"); exit; }
+
+if (!isset($_SESSION['status']) || $_SESSION['role'] != 'admin') {
+    header("Location: ../index.php"); // Redirect ke index.php (mundur 1 folder)
+    exit;
+}
 
 if (isset($_GET['hapus'])) {
     mysqli_query($conn, "DELETE FROM timeline WHERE id='$_GET[hapus]'");

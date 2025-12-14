@@ -1,11 +1,14 @@
 <?php
 session_start();
-include 'koneksi.php';
+<?php
+session_start();
+include 'koneksi.php'; // Jika ada include koneksi
 
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
-    header("Location: login.php");
+    header("Location: index.php"); // Redirect ke index.php
     exit;
 }
+// ... sisa kode ...
 
 $query = mysqli_query($conn, "SELECT * FROM realms");
 ?>
