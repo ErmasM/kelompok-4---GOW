@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'koneksi.php'; // Jika ada include koneksi
+include 'koneksi.php'; 
 
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
     header("Location: index.php"); 
