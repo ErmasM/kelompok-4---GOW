@@ -3,7 +3,7 @@ session_start();
 include 'koneksi.php';
 
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
-    header("Location: index.php"); // Diubah dari login.php
+    header("Location: index.php");
     exit;
 }
 
