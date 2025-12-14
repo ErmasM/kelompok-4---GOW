@@ -2,7 +2,6 @@
 session_start();
 include 'koneksi.php';
 
-// PERUBAHAN: Jika belum login, arahkan ke index.php
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
     header("Location: index.php"); // Diubah dari login.php
     exit;
@@ -54,7 +53,6 @@ if ($timeline_count < 5) {
     }
 }
 
-//DETAILED STORY BASED ON SERIES
 $detailed_story = getDetailedStory($id, $series['judul'], $series['deskripsi']);
 
 function getDefaultTimeline($series_id, $series_title) {
@@ -118,7 +116,6 @@ function getDefaultTimeline($series_id, $series_title) {
         );
     }
     
-    // Add specific timelines based on game title
     switch(strtoupper($series_title)) {
         case 'GOD OF WAR (2005)':
             $timelines[0]['judul_chapter'] = 'BATTLE OF ATTICA';
@@ -634,7 +631,7 @@ function getDetailedStory($series_id, $series_title, $base_description) {
         .bar-range   { background: linear-gradient(90deg,#00a3ff,#66ccff); box-shadow: 0 6px 18px rgba(0,163,255,0.12); }
         .bar-crown   { background: linear-gradient(90deg,#8a2be2,#b28cff); box-shadow: 0 6px 18px rgba(138,43,226,0.12); }
 
-        /* === 8. BOSS BATTLE (DIPERBAIKI) === */
+        /* === BOSS BATTLE === */
         .boss-section { 
             background: radial-gradient(circle at 50% 0%, rgba(179, 0, 0, 0.15) 0%, transparent 60%), linear-gradient(to bottom, #111, #000); 
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -649,7 +646,7 @@ function getDetailedStory($series_id, $series_title, $base_description) {
             display: flex; flex-direction: column; align-items: center;
         }
 
-        /* === BATTLE MODAL & CONTAINER (DIPERBAIKI) === */
+        /* === BATTLE MODAL & CONTAINER === */
         .battle-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 2000;
@@ -659,7 +656,6 @@ function getDetailedStory($series_id, $series_title, $base_description) {
 
         .battle-container {
             width: 900px; 
-            /* Perbaikan: min-height bukan height agar responsif */
             min-height: 600px; 
             position: relative;
             background: radial-gradient(circle, rgba(20,0,0,0.9), #000), 
