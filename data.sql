@@ -117,4 +117,4 @@ INSERT INTO timeline (series_id, judul_chapter, deskripsi, urutan, gambar) VALUE
 (1, 'Hydra Battle', 'Kratos melawan Hydra di Laut Aegean atas perintah Poseidon.', 1, 'Hydra_Boss_Fight4_-_God_of_War2005.webp'),
 (1, 'Pandora Temple', 'Mencari Kotak Pandora untuk mengalahkan Ares.', 2, 'Temple_5.webp'),
 (4, 'The Journey Begins', 'Kratos menebang pohon bertanda tangan istrinya.', 1, 'GOW 2018.jpg'),
-(4, 'The Stranger', 'Pertarungan pertama melawan Baldur.', 2, 'GOW ascension.jpg');
+(4, 'The Stranger', 'Pertarungan pertama melawan Baldur.', 2, 'GOW ascension.jpg');a

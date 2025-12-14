@@ -26,12 +26,8 @@ $query = mysqli_query($conn, "SELECT * FROM series ORDER BY id ASC");
             font-family: 'Cinzel', serif; 
             color: white; 
             background-color: #000; 
-            
-            /* --- PERBAIKAN SCROLL --- */
-            /* Sebelumnya overflow: hidden; membuat tidak bisa scroll */
             overflow-x: hidden; 
             overflow-y: auto; 
-            
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
@@ -46,22 +42,44 @@ $query = mysqli_query($conn, "SELECT * FROM series ORDER BY id ASC");
         .nav-links a { text-decoration: none; color: #ccc; margin: 0 8px; letter-spacing: 2px; font-size: 14px; padding: 8px 18px; background: rgba(0, 0, 0, 0.5); border-radius: 25px; transition: .3s; }
         .nav-links a:hover, .nav-links a.active { color: white; border: 1px solid #cfa35e; box-shadow: 0 0 15px rgba(207,163,94,.4); }
         
+        /* --- TOMBOL LOGOUT BARU (Bubble Merah) --- */
+        .logout-btn {
+            padding: 8px 25px;
+            background: rgba(60, 0, 0, 0.6); 
+            border: 1px solid #ff3b3b; 
+            border-radius: 30px; 
+            color: #ff3b3b;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.2);
+        }
+
+        .logout-btn:hover {
+            background: #b30000; 
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8); 
+            transform: scale(1.05);
+            border-color: #ff0000;
+        }
+
         .main-content { 
             flex-grow: 1; 
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
             position: relative; 
-            padding: 20px 0; /* Tambah padding agar tidak mepet atas bawah saat di scroll */
+            padding: 20px 0; 
         }
         
         .page-title { text-align: center; font-size: 2.5rem; margin-bottom: 10px; color: #cfa35e; letter-spacing: 8px; text-transform: uppercase; text-shadow: 0 0 20px rgba(207,163,94,0.4); animation: slideDown 1s ease-out; }
         
-        /* Ubah tinggi slider agar menyesuaikan konten, bukan fixed */
         .slider-wrapper { 
             position: relative; 
             width: 100%; 
-            min-height: 550px; /* Gunakan min-height */
+            min-height: 550px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -78,7 +96,6 @@ $query = mysqli_query($conn, "SELECT * FROM series ORDER BY id ASC");
         .card-title { font-size: 1rem; text-transform: uppercase; margin-bottom: 5px; color: #fff; text-align: center; font-weight: 700; min-height: 40px; display: flex; align-items: center; justify-content: center; }
         .card-info { font-family: 'Lato', sans-serif; font-size: 0.8rem; color: #aaa; margin-bottom: 15px; }
         
-        /* Tombol Teleport */
         .btn-teleport { background: linear-gradient(45deg, #8b0000, #b30000); color: white; width: 100%; border: none; padding: 12px 0; font-family: 'Cinzel', serif; font-weight: bold; cursor: pointer; margin-top: auto; clip-path: polygon(10px 0, 100% 0, 100% 100%, 0% 100%, 0% 10px); transition: 0.3s; }
         .btn-teleport:hover { background: #ff0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
         
@@ -89,6 +106,10 @@ $query = mysqli_query($conn, "SELECT * FROM series ORDER BY id ASC");
         #portal-overlay.active { opacity: 1; pointer-events: all; }
         @keyframes slideDown { from { transform: translateY(-40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes fadeInUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; padding: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -102,7 +123,7 @@ $query = mysqli_query($conn, "SELECT * FROM series ORDER BY id ASC");
             <a href="series.php" class="active">SERIES</a>
             <a href="about.php">ABOUT</a>
         </div>
-        <a href="logout.php" style="color:#ff3b3b; font-size:12px; font-weight:bold;">LOGOUT</a>
+        <a href="logout.php" class="logout-btn">LOGOUT</a>
     </nav>
 
     <div class="main-content">

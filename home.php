@@ -2,7 +2,6 @@
 session_start();
 
 // 1. Logic Backend (Sama dengan punya Ezra)
-// Cek apakah user sudah login. Jika belum, tendang ke login.php
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
     header("Location: login.php");
     exit;
@@ -27,7 +26,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
             color: white;
             overflow: hidden;
             height: 100vh;
-            background-color: #000; /* Fallback jika video gagal load */
+            background-color: #000; 
         }
 
         /* --- BACKGROUND VIDEO --- */
@@ -38,7 +37,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
             object-fit: fill;
             z-index: -100;
             filter: brightness(0.6);
-            transform: scaleX(-1); /* MIRROR */
+            transform: scaleX(-1); 
         }
 
         /* --- SOUND BUTTON --- */
@@ -155,7 +154,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
 <body>
 
     <video autoplay muted loop id="bg-video">
-        <source src="asset/trailer homepage.mp4" type="video/mp4">
+        <source src="assET/Untitled video - Made with Clipchamp (3).mp4" type="video/mp4">
     </video>
 
     <button id="sound-btn">🔊 ENABLE SOUND</button>

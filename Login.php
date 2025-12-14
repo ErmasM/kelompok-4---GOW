@@ -11,11 +11,10 @@ if (isset($_POST['login'])) {
     
     if (mysqli_num_rows($query) === 1) {
         $data = mysqli_fetch_assoc($query);
-        // Cek password (mendukung hash atau plain text sesuai data lama)
         if ($password === $data['password'] || password_verify($password, $data['password'])) {
             $_SESSION['user_id'] = $data['id'];
             $_SESSION['nama'] = $data['nama'];
-            $_SESSION['role'] = $data['role']; // Penting untuk Admin
+            $_SESSION['role'] = $data['role'];
             $_SESSION['status'] = "login";
 
             if ($data['role'] == 'admin') {
