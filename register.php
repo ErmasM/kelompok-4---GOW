@@ -2,7 +2,6 @@
 include 'koneksi.php';
 
 if (isset($_POST['register'])) {
-    // ... (kode bagian atas tetap sama) ...
     if ($password === $confirm_password) {
         // ...
         if (mysqli_num_rows($cek_email) > 0) {
