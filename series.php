@@ -1,14 +1,12 @@
 <?php
 session_start();
-include 'koneksi.php'; // Jika ada include koneksi
+include 'koneksi.php';
 
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
-    header("Location: index.php"); // Redirect ke index.php
+    header("Location: index.php");
     exit;
 }
 
-
-// Ambil data series dari database Ezra untuk ditampilkan di card Ermas
 $query = mysqli_query($conn, "SELECT * FROM series ORDER BY id ASC");
 ?>
 
@@ -20,7 +18,6 @@ $query = mysqli_query($conn, "SELECT * FROM series ORDER BY id ASC");
     <title>God of War - Series Selection</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Frontend Ermas (Fixed Scroll) */
         * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
         
         body { 
@@ -43,7 +40,6 @@ $query = mysqli_query($conn, "SELECT * FROM series ORDER BY id ASC");
         .nav-links a { text-decoration: none; color: #ccc; margin: 0 8px; letter-spacing: 2px; font-size: 14px; padding: 8px 18px; background: rgba(0, 0, 0, 0.5); border-radius: 25px; transition: .3s; }
         .nav-links a:hover, .nav-links a.active { color: white; border: 1px solid #cfa35e; box-shadow: 0 0 15px rgba(207,163,94,.4); }
         
-        /* --- TOMBOL LOGOUT BARU (Bubble Merah) --- */
         .logout-btn {
             padding: 8px 25px;
             background: rgba(60, 0, 0, 0.6); 
