@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'koneksi.php'; // Jika ada include koneksi
+include 'koneksi.php'; 
 
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
-    header("Location: index.php"); // Redirect ke index.php
+    header("Location: index.php"); 
     exit;
 }
 
@@ -164,7 +164,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
         const video = document.getElementById("bg-video");
         const btn = document.getElementById("sound-btn");
 
-        // Fitur Sound Toggle
         btn.addEventListener("click", () => {
             video.muted = !video.muted;
             if (video.muted) {
