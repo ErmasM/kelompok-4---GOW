@@ -3,15 +3,13 @@ session_start();
 include '../koneksi.php';
 
 if (!isset($_SESSION['status']) || $_SESSION['role'] != 'admin') {
-    header("Location: ../index.php"); // Redirect ke index.php (mundur 1 folder)
+    header("Location: ../index.php"); 
     exit;
 }
-
 
 $edit_mode = false;
 $id_edit = ""; $nama_edit = ""; $peran_edit = ""; $series_id_edit = ""; $img_edit = "";
 
-// Cek jika mode Edit
 if (isset($_GET['edit'])) {
     $edit_mode = true;
     $id_edit = $_GET['edit'];
@@ -23,7 +21,6 @@ if (isset($_GET['edit'])) {
     $img_edit = $d['gambar'];
 }
 
-// Proses Simpan
 if (isset($_POST['simpan'])) {
     $nama = htmlspecialchars($_POST['nama']);
     $peran = htmlspecialchars($_POST['peran']);
@@ -40,7 +37,6 @@ if (isset($_POST['simpan'])) {
             mysqli_query($conn, "UPDATE characters SET gambar='$gambar' WHERE id='$id'");
         }
     } else {
-        // INSERT
         $gambar = $_FILES['gambar']['name'];
         move_uploaded_file($_FILES['gambar']['tmp_name'], "../asset/" . $gambar);
         $query = "INSERT INTO characters (series_id, nama, peran, gambar) VALUES ('$series_id', '$nama', '$peran', '$gambar')";
