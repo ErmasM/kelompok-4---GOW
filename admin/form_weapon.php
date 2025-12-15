@@ -3,14 +3,13 @@ session_start();
 include '../koneksi.php';
 
 if (!isset($_SESSION['status']) || $_SESSION['role'] != 'admin') {
-    header("Location: ../index.php"); // Redirect ke index.php (mundur 1 folder)
+    header("Location: ../index.php"); 
     exit;
 }
 
 
 $edit_mode = false; 
 $id_edit = ""; $nama_edit = ""; $deskripsi_edit = ""; $series_id_edit = ""; $img_edit = "";
-// Default stats
 $dmg_edit = 50; $spd_edit = 50; $rng_edit = 50; $cc_edit = 50;
 
 if (isset($_GET['edit'])) {
@@ -19,7 +18,6 @@ if (isset($_GET['edit'])) {
     $d = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM weapons WHERE id='$id'"));
     $id_edit = $d['id']; $nama_edit = $d['nama_senjata']; $deskripsi_edit = $d['deskripsi']; 
     $series_id_edit = $d['series_id']; $img_edit = $d['gambar'];
-    // Ambil stats dari DB
     $dmg_edit = $d['stat_damage']; $spd_edit = $d['stat_speed']; 
     $rng_edit = $d['stat_range']; $cc_edit = $d['stat_cc'];
 }
@@ -29,7 +27,6 @@ if (isset($_POST['simpan'])) {
     $deskripsi = htmlspecialchars($_POST['deskripsi']);
     $series_id = $_POST['series_id'];
     
-    // Ambil data stats
     $dmg = $_POST['stat_damage']; $spd = $_POST['stat_speed']; 
     $rng = $_POST['stat_range']; $cc = $_POST['stat_cc'];
 
