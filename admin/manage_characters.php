@@ -3,10 +3,9 @@ session_start();
 include '../koneksi.php';
 
 if (!isset($_SESSION['status']) || $_SESSION['role'] != 'admin') {
-    header("Location: ../index.php"); // Redirect ke index.php (mundur 1 folder)
+    header("Location: ../index.php"); 
     exit;
 }
-
 
 if (isset($_GET['hapus'])) {
     $id = $_GET['hapus'];
