@@ -6,7 +6,6 @@ if (isset($_POST['login'])) {
     $email = htmlspecialchars($_POST['email']);
     $password = $_POST['password'];
     
-    // Logic Backend Ezra
     $query = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email'");
     
     if (mysqli_num_rows($query) === 1) {
