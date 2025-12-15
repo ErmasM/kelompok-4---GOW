@@ -3,18 +3,14 @@ session_start();
 include '../koneksi.php';
 
 if (!isset($_SESSION['status']) || $_SESSION['role'] != 'admin') {
-    header("Location: ../index.php"); // Redirect ke index.php (mundur 1 folder)
+    header("Location: ../index.php"); 
     exit;
 }
 
-
-// Inisialisasi Variabel
 $id_edit = ""; $judul_edit = ""; $tahun_edit = ""; $platform_edit = ""; 
 $deskripsi_edit = ""; $img_edit = "";
-// Variabel Boss Default
 $boss_name_edit = ""; $boss_hp_edit = 1000; $boss_img_edit = "";
 
-// Ambil data jika tombol EDIT diklik
 if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
     $q = mysqli_query($conn, "SELECT * FROM series WHERE id='$id'");
@@ -26,14 +22,12 @@ if (isset($_GET['edit'])) {
     $platform_edit = $d['platform'];
     $deskripsi_edit = $d['deskripsi'];
     $img_edit = $d['gambar'];
-    
-    // Data Boss
+
     $boss_name_edit = $d['boss_name'];
     $boss_hp_edit = $d['boss_hp'];
     $boss_img_edit = $d['boss_img'];
 }
 
-// Proses Simpan Perubahan
 if (isset($_POST['simpan'])) {
     $id = $_POST['id_edit'];
     $judul = htmlspecialchars($_POST['judul']);
@@ -41,11 +35,9 @@ if (isset($_POST['simpan'])) {
     $platform = htmlspecialchars($_POST['platform']);
     $deskripsi = htmlspecialchars($_POST['deskripsi']);
     
-    // Data Boss Baru
     $boss_name = htmlspecialchars($_POST['boss_name']);
     $boss_hp = $_POST['boss_hp'];
 
-    // Update Data Teks
     $query = "UPDATE series SET 
               judul='$judul', tahun='$tahun', platform='$platform', deskripsi='$deskripsi',
               boss_name='$boss_name', boss_hp='$boss_hp'
@@ -53,14 +45,12 @@ if (isset($_POST['simpan'])) {
     
     mysqli_query($conn, $query);
 
-    // Update Gambar Cover
     if (!empty($_FILES['gambar']['name'])) {
         $gambar = $_FILES['gambar']['name'];
         move_uploaded_file($_FILES['gambar']['tmp_name'], "../asset/" . $gambar);
         mysqli_query($conn, "UPDATE series SET gambar='$gambar' WHERE id='$id'");
     }
 
-    // Update Gambar Boss
     if (!empty($_FILES['boss_img']['name'])) {
         $boss_img = $_FILES['boss_img']['name'];
         move_uploaded_file($_FILES['boss_img']['tmp_name'], "../asset/" . $boss_img);
